@@ -46,9 +46,10 @@ class Main extends Component {
     }
 
     componentDidMount() {
-        if (Object.values(this.props.user).length === 0){
-            this.props.history.push('/');
-        }
+        // TODO: help?
+        // if (Object.values(this.props.user).length === 0){
+        //     this.props.history.push('/');
+        // }
     }
 
     openModal(e) {
