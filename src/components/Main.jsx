@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Button, PageHeader } from 'react-bootstrap';
+import { Button, PageHeader, Checkbox } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
-import { images } from '../images/UserImage';
+import { MdLink, MdCloudUpload, MdCloudDownload, MdStarBorder, MdEventNote, MdDelete } from "react-icons/md";
+import Transcription from '../images/Transcription.png';
 import Header from './Header';
+import AssetHeader  from './AssetHeader';
 import Tags from './Modals/Tags';
 import Buckets from './Modals/Buckets';
 import '../App.css';
@@ -35,7 +37,7 @@ class Main extends Component {
         this.state = {
             bucket: {},
             tags: {},
-            comments: 'Comments',
+            comments: 'Notes',
             currentUser: null
         };
 
@@ -162,47 +164,77 @@ class Main extends Component {
         return (
             <div className="App">
                 <Header />
-                <div className="container">
-                    <div className="userdata">
-                        <img alt="" src={`${images[this.state.currentUser]}`}/>
-                        <h4>{ this.state.currentUser + '\'s data'}</h4>
-                    </div>
-                    <div className="video-player">
-                        <video width="520" height="340" controls>
-                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <div className="button-row">
-                        <div className="modal-button">
-                            <Button bsStyle="success" onClick={this.openModal} name="tags">
-                                Tags
-                            </Button>
-                            <Tags
-                                {...this.state.tags}
-                                openModal={this.openModal}
-                                closeModal={this.closeModal}
-                                lockModalPos={this.lockModalPos}
-                                />
+                <AssetHeader />
+                <div className="containers">
+                    <div className="container-left">
+                        <div className="video-player">
+                            <video width="520" height="340" controls>
+                                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
-                        <div className="modal-button">
-                            <Button  bsStyle="warning" onClick={this.openModal} name="bucket">
-                                Bucket
-                            </Button>
-                            <Buckets
-                                {...this.state.bucket}
-                                openModal={this.openModal}
-                                closeModal={this.closeModal}
-                                lockModalPos={this.lockModalPos}
-                                checkTheBox={this.checkTheBox}
-                                />
+                        <div className="action-row">
+                            <ul>
+                                <li><MdLink /></li>
+                                <li><MdCloudUpload /></li>
+                                <li><MdCloudDownload /></li>
+                                <li><MdStarBorder /></li>
+                                <li><MdEventNote /></li>
+                                <li><MdDelete /></li>
+                            </ul>
+                        </div>
+                        <div className="access-control">
+                            <Checkbox name="allow-dl"><h4>Allow Downloads</h4></Checkbox>
+                            <Checkbox name="allow-share"><h4>Allow Sharing</h4></Checkbox>
+                            <br />
+                            <h4>Anyone with the following link can view this asset: (???)</h4>
                         </div>
                     </div>
-                    <div className="comments">
-                        <textarea value={this.state.comments} />
-                    </div>
-                    <div className="save-button">
-                        <Button onClick={this.save}>Save</Button>
+                    <div className="container-right">
+                        <div className="button-row">
+                            <div className="modal-button">
+                                <Button onClick={this.openModal} name="tags">
+                                    Tags
+                                </Button>
+                                <Tags
+                                    {...this.state.tags}
+                                    openModal={this.openModal}
+                                    closeModal={this.closeModal}
+                                    lockModalPos={this.lockModalPos}
+                                    />
+                            </div>
+                            <div className="modal-button">
+                                <Button onClick={this.openModal} name="bucket">
+                                    Bucket
+                                </Button>
+                                <Buckets
+                                    {...this.state.bucket}
+                                    openModal={this.openModal}
+                                    closeModal={this.closeModal}
+                                    lockModalPos={this.lockModalPos}
+                                    checkTheBox={this.checkTheBox}
+                                    />
+                            </div>
+                            <div className="modal-button">
+                                <Button onClick={this.openModal} name="data">
+                                    Data
+                                </Button>
+                            </div>
+                            <div className="modal-button">
+                                <Button onClick={this.openModal} name="attributes">
+                                    Attribute
+                                </Button>
+                            </div>
+                        </div>
+                        <div className="transcription">
+                            <img src={Transcription} alt=""/>
+                        </div>
+                        <div className="comments">
+                            <textarea value={this.state.comments} />
+                        </div>
+                        <div className="save-button">
+                            <Button onClick={this.save}>Save</Button>
+                        </div>
                     </div>
                 </div>
             </div>

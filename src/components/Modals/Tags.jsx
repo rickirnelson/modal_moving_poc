@@ -13,8 +13,8 @@ class Tags extends React.Component {
                     <div id="m1" name="tags">
                         <h3>Tags</h3>
                         <div className="body" style={{ display: 'flex', justifyContent: 'center' }}>
-                            <Label style={{ margin: '10px', padding: '10px', background: 'pink' }}>Tag #1</Label>
-                            <Label style={{ margin: '10px', padding: '10px', background: 'lightgreen' }}>Tag #2</Label>
+                            <Label style={{ margin: '10px', padding: '10px', background: 'lightgrey' }}>Tag #1</Label>
+                            <Label style={{ margin: '10px', padding: '10px', background: 'lightgrey' }}>Tag #2</Label>
                         </div>
                         <Button onClick={closeModal} name="tags">
                             Close

@@ -11,7 +11,7 @@ class Header extends React.Component {
             <div className="header">
                 <PageHeader>
                     <div>
-                        POC: Draggable Modals
+                        POC: Asset Review Page
                     </div>
                 </PageHeader>
                 {!isLogin

@@ -1,10 +1,31 @@
 .App {
-  /* text-align: center; */
+  display: flex;
+  flex-direction: column;
+}
+
+.containers {
+    margin-left: 5%;
+    display: flex;
+}
+
+.container-left {
+    margin: 1%;
+    padding: 2%;
+}
+
+.container-right {
+    margin: 1%;
+    padding: 3%;
+}
+
+.modal-button {
+    margin: 4%;
 }
 
 .body {
     margin: 0;
 }
+
 .page-header {
     margin: 0;
     padding-left: 10em;
@@ -24,20 +45,40 @@
     align-items: baseline
 }
 
+.action-row ul {
+    display: flex;
+    width: 500px;
+    justify-content: space-around;
+    list-style: none
+}
+
+.action-row ul li svg {
+    height: 30px;
+    width: 30px;
+}
+
+.access-control input {
+    height: 30px;
+    width: 30px;
+}
+
 .userdata img {
     height: 70px;
     width: 100px;
     object-fit: contain;
 }
 
-.container {
-    background: whitesmoke;
-    padding: 20px;
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-    box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
-    height: 100vh;
+.transcription img {
+    height: 300px;
+    border: 1px solid whitesmoke;
 }
+
+.comments textarea {
+    height: 100px;
+    width: 500px;
+    border: 1px solid lightgrey;
+}
+
 .header-back-button {
     padding-right: 10em;
 }
@@ -59,7 +100,7 @@
     margin: 1em;
     width: 150px;
     display: flex;
-    background-color: whitesmoke;
+
     justify-content: space-between;
 }
 
@@ -70,7 +111,8 @@
     justify-content: space-between;
 }
 
-/* .flexible-modal-mask {
+/*
+.flexible-modal-mask {
   position: fixed;
   height: 100%;
   background: rgba(55, 55, 55, 0.6);
@@ -78,7 +120,8 @@
   left:0;
   right:0;
   bottom:0;
-} */
+}
+*/
 
 .flexible-modal-resizer {
   position:absolute;
@@ -90,7 +133,7 @@
   border-right: solid 2px #333;
 }
 .flexible-modal-drag-area{
-  background: rgba(22, 22, 333, 0.2);
+  background: rgba(0, 0, 0, 0.2);
   height: 50px;
   position:absolute;
   right:0;
