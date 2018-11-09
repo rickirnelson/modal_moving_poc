@@ -16,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "aws s3 cp --recursive ./build s3://modal-moving-poc"
+    "deploy": "aws s3 cp --recursive ./build s3://www.poc-asset-page.com"
   },
   "eslintConfig": {
     "extends": "react-app"

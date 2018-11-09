@@ -31,6 +31,30 @@
     padding-left: 10em;
 }
 
+.asset-video-player video {
+    height: 50px;
+    width: 100px;
+    object-fit: cover;
+}
+
+.asset-detail-list {
+    display: flex;
+}
+
+.asset-name {
+    font-weight: bolder;
+    padding-left: 5px;
+}
+
+.asset-notes {
+    padding-left: 5px;
+}
+
+#m3 {
+    display: flex;
+    flex-direction: column;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -52,7 +76,43 @@
     list-style: none
 }
 
+.playlist-name {
+
+}
+
+.checkboxes {
+
+}
+
+.checkboxes ul {
+    list-style: none;
+}
+
+.checkbox label {
+    display: flex;
+    
+}
 .action-row ul li svg {
+    height: 30px;
+    width: 30px;
+}
+
+.tag-input {
+    display: flex;
+    justify-content: center;
+}
+
+.bucket-input {
+    display: flex;
+    padding-left: 20px;
+}
+
+.tag-input svg {
+    height: 30px;
+    width: 30px;
+}
+
+.bucket-input svg {
     height: 30px;
     width: 30px;
 }
@@ -100,7 +160,6 @@
     margin: 1em;
     width: 150px;
     display: flex;
-
     justify-content: space-between;
 }
 

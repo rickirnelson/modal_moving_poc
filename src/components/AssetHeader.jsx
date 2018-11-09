@@ -11,12 +11,11 @@ class AssetHeader extends React.Component {
                 <PageHeader>
                     <div>
                         <h4>
-                            Header
+                            Asset Name
                         </h4>
                     </div>
                 </PageHeader>
             </div>
-
         );
     }
 }
