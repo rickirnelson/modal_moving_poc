@@ -24,6 +24,9 @@
 
 .body {
     margin: 0;
+    justify-content: unset;
+    position: relative;
+    top: 3%;
 }
 
 .page-header {
@@ -31,14 +34,35 @@
     padding-left: 10em;
 }
 
+.video-player video {
+    height: 500px;
+    width: 300px;
+    object-fit: fill;
+}
+
 .asset-video-player video {
-    height: 50px;
-    width: 100px;
+    height: 80px;
+    width: 80px;
     object-fit: cover;
+}
+
+.check-add-asset-row {
+    display: flex;
+    align-items:baseline;
+    justify-content: space-between;
 }
 
 .asset-detail-list {
     display: flex;
+    overflow: hidden;
+    margin: 1em;
+    padding: 0;
+}
+
+.bucket-detail {
+    overflow: scroll !important;
+    border-top: 1px solid whitesmoke;
+    border-bottom: 1px solid whitesmoke;
 }
 
 .asset-name {
@@ -50,11 +74,21 @@
     padding-left: 5px;
 }
 
+.add-asset-btn {
+    text-align: initial;
+    margin-right: 1em;
+}
+
 #m3 {
     display: flex;
     flex-direction: column;
 }
 
+.buckets {
+    position: relative;
+    top: 10%;
+    right: 100%;
+}
 .header {
     display: flex;
     justify-content: space-between;
@@ -71,7 +105,8 @@
 
 .action-row ul {
     display: flex;
-    width: 500px;
+    width: 300px;
+    padding: 0;
     justify-content: space-around;
     list-style: none
 }
@@ -81,16 +116,19 @@
 }
 
 .checkboxes {
-
+    /* overflow: scroll; */
+    height: 300px;
 }
 
 .checkboxes ul {
     list-style: none;
+    overflow: scroll !important;
+    height: 100%;
 }
 
 .checkbox label {
     display: flex;
-    
+
 }
 .action-row ul li svg {
     height: 30px;
@@ -105,6 +143,14 @@
 .bucket-input {
     display: flex;
     padding-left: 20px;
+    margin: 10px;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 2%;
+    right: 4%;
+    z-index: 10000
 }
 
 .tag-input svg {
@@ -120,6 +166,10 @@
 .access-control input {
     height: 30px;
     width: 30px;
+}
+
+.access-control {
+    width: 300px;
 }
 
 .userdata img {
@@ -149,7 +199,11 @@
   z-index: 1;
   border: 1px solid #ccc;
   background: white;
+  /* height: 500px !important; */
+  /* overflow: scroll !important; */
 }
+
+
 
 .save-button {
     position: relative;
@@ -181,7 +235,29 @@
   bottom:0;
 }
 */
+.bucket-modal {
+    background: white;
+    border: 1px solid lightgrey;
+    height: 100%;
+    /* overflow: scroll; */
+    padding-bottom: 20px;
+    box-shadow: 2px 3px 4px rgba(0,0,0,0.4);
+}
 
+.bucket-modal h3 {
+    position: absolute;
+    text-align: center;
+}
+
+.playlist-header {
+    padding-bottom: 10px;
+    background-color: lightgrey;
+    height: 60px;
+    position: relative;
+    overflow:hidden;
+    display: flex;
+    justify-content: center;
+}
 .flexible-modal-resizer {
   position:absolute;
   right:0;
@@ -191,8 +267,9 @@
   border-bottom: solid 2px #333;
   border-right: solid 2px #333;
 }
+
 .flexible-modal-drag-area{
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.0);
   height: 50px;
   position:absolute;
   right:0;

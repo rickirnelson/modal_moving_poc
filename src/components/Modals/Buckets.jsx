@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 import ReactModal from 'react-modal-resizable-draggable';
 import { MdAddCircleOutline } from "react-icons/md";
 import { Button, Checkbox } from 'react-bootstrap';
+import '../../App.css';
+
 
 class Buckets extends React.Component {
     state = {
@@ -19,7 +21,8 @@ class Buckets extends React.Component {
         if (this.state.value.length > 0) {
             const listItemObj = {
                 listName: this.state.value,
-                assets: []
+                assets: [],
+                checked: false
             }
             this.props.createListItem(listItemObj);
             return this.setState({
@@ -32,7 +35,7 @@ class Buckets extends React.Component {
         const assetData = {
             assetName: this.props.assetName,
             notes: this.state.notes,
-            video: 'https://www.w3schools.com/html/mov_bbb.mp4'
+            video: this.props.assetVideo
         }
 
         this.props.addAsset(assetData, e.target.value);
@@ -45,29 +48,32 @@ class Buckets extends React.Component {
         if (!playlists) {
             return (<div> no playlists yet...</div>)
         }
+        console.log('what is in playlists', playlists)
         return (
             <div className="checkboxes">
                 <ul>
                     {
                         playlists.map((bucket, i) =>
-                            <Fragment>
-                                <li>
-                                    <Checkbox
-                                        name={`${bucket}-${i}`}
-                                        onChange={e => this.props.checkTheBox(e, 'bucket')}
-                                        checked={this.props[`${bucket}-${i}`] ? this.props[`${bucket}-${i}`] : false}
-                                        >
-                                        {bucket.listName}
-                                    </Checkbox>
+                            <Fragment key={`${bucket.listName}-${i}`}>
+                                <li className="check-add-asset-row">
+                                    <div>
+                                        <Checkbox
+                                            name={`${bucket}-${i}`}
+                                            onChange={e => this.props.checkTheBox(e, 'bucket', bucket.listName)}
+                                            checked={bucket.checked ? bucket.checked : false}
+                                            >
+                                            <span style={{ fontWeight: 'bolder'}}>{bucket.listName}</span>
+                                        </Checkbox>
+                                    </div>
+                                    <div className="add-asset-btn">
+                                        { bucket.checked &&
+                                            <button value={bucket.listName} onClick={this.addAssetToPlaylist}>Add Asset</button>
+                                        }
+                                    </div>
                                 </li>
-                                <li>
-                                    { this.props[`${bucket}-${i}`] &&
-                                        this.renderListAssets(bucket, this.props[`${bucket}-${i}`])
-                                    }
-                                </li>
-                                <li>
-                                    { this.props[`${bucket}-${i}`] &&
-                                        <button value={bucket.listName} onClick={this.addAssetToPlaylist}>Add Asset</button>
+                                <li className="asset-detail">
+                                    { bucket.checked &&
+                                        this.renderListAssets(bucket, bucket.checked)
                                     }
                                 </li>
                             </Fragment>
@@ -111,28 +117,27 @@ class Buckets extends React.Component {
         const { width, height, top, left, closeModal, modalIsOpen, lockModalPos, checkTheBox, createListItem, listItems } = this.props;
 
         return (
-            <div>
-                <ReactModal initWidth={300} initHeight={height + 50} top={top} left={left} onRequestClose={closeModal} isOpen={modalIsOpen}>
-                    <div name="bucket" id="m2">
-                        <h3>Playlist</h3>
-                        <div className="body">
-                            <div className="bucket-input">
-                                <MdAddCircleOutline color={this.state.value.length === 0 ? "grey" : "orange"} onClick={this.createNewListItem}/>
-                                <input type="text" value={this.state.value} onChange={this.handleChange}/>
-                            </div>
+            <div className="buckets">
+                <ReactModal initWidth={300} initHeight={500}  onRequestClose={closeModal} isOpen={modalIsOpen}>
+                    <div name="bucket" className="bucket-modal" id="m2">
+                        <div className="playlist-header">
+                            <h3>Playlist</h3>
+                        </div>
+                        <div className="close-modal-btn">
+                            <Button onClick={closeModal} name="bucket">
+                                x
+                            </Button>
+                        </div>
+                    <div className="body">
+                        <div className="bucket-input">
+                            <MdAddCircleOutline color={this.state.value.length === 0 ? "grey" : "orange"} onClick={this.createNewListItem}/>
+                            <input type="text" value={this.state.value} onChange={this.handleChange}/>
                         </div>
                         <div>
                             {this.renderLists(listItems)}
                         </div>
-                        <div>
-                            <Button onClick={closeModal} name="bucket">
-                                Close
-                            </Button>
-                            <Button name="bucket" onClick={e => lockModalPos(e, "m2")}>
-                                {"Save Position"}
-                            </Button>
-                        </div>
                     </div>
+                </div>
                 </ReactModal>
             </div>
         )

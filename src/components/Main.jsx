@@ -9,6 +9,7 @@ import Tags from './Modals/Tags';
 import Buckets from './Modals/Buckets';
 import Data from './Modals/Data';
 import Attributes from './Modals/Attributes';
+import { VIDEO } from '../videos/VideoLinks';
 import '../App.css';
 
 const formatBucketData = (name, position) => {
@@ -46,7 +47,8 @@ class Main extends Component {
             attributes: {},
             comments: 'Notes',
             currentUser: null,
-            assetName: 'Asset Name'
+            assetName: 'Asset Name',
+            assetVideo: VIDEO.demo1
         };
 
         this.openModal = this.openModal.bind(this);
@@ -129,14 +131,34 @@ class Main extends Component {
         this.setState(modal);
     }
 
-    checkTheBox = (e, type) => {
-        const isChecked = this.state[type][e.target.name];
-        const copyData = Object.assign({}, { ...this.state[type]}, {[e.target.name]: !isChecked });
-        const mergeState = Object.assign({}, { ...this.state})
-        delete mergeState[type];
-        mergeState[type] = copyData;
-        this.save(mergeState);
-        this.setState(mergeState);
+    checkTheBox = (e, type, listname) => {
+
+        if (type === 'bucket') {
+            this.state[type].listItems.forEach(item => {
+                console.log('item', item, listname)
+                if (item.listName === listname) {
+                    console.log('ischecked', item.checked)
+                    item.checked = !item.checked
+                }
+            })
+            console.log('bucket', this.state[type])
+            const isChecked = this.state[type].listItems.checked;
+            const copyData = Object.assign({}, { ...this.state[type]});
+            console.log('copied data', copyData)
+            const mergeState = Object.assign({}, { ...this.state});
+            mergeState[type] = copyData;
+            console.log('mergedstate', mergeState);
+            this.save(mergeState);
+            this.setState(mergeState);
+        } else {
+            const isChecked = this.state[type][e.target.name];
+            const copyData = Object.assign({}, { ...this.state[type]}, {[e.target.name]: !isChecked });
+            const mergeState = Object.assign({}, { ...this.state})
+            delete mergeState[type];
+            mergeState[type] = copyData;
+            this.save(mergeState);
+            this.setState(mergeState);
+        }
     }
 
     createNewTag = (newTagData) => {
@@ -146,17 +168,23 @@ class Main extends Component {
         const updatedTagData = (tagCopy.tagData || []).concat(newTagData);
         this.setState({
             tags: {
-                tagData: updatedTagData
+                tagData: updatedTagData,
+                modalIsOpen: true
             },
         });
     }
 
+    //We want to add a checked feature to the state of the bucket.
+    // its deeply nested so we have to do some things...
+
     createListItem = (itemData) => {
         const bucketCopy = Object.assign({}, this.state.bucket);
+        console.log('checked', this.state.bucket)
         const updatedItemData = (bucketCopy.listItems || []).concat(itemData);
         this.setState({
             bucket: {
-                listItems: updatedItemData
+                listItems: updatedItemData,
+                modalIsOpen: true
             }
         })
     }
@@ -170,12 +198,12 @@ class Main extends Component {
                 item.assets.push(asset)
             }
         })
-
         console.log('adding?', updatedItemData)
         // updatedItemData.assets.concat(asset);
         this.setState({
             bucket: {
-                listItems: updatedItemData
+                listItems: updatedItemData,
+                modalIsOpen: true
             }
         })
     }
@@ -211,6 +239,7 @@ class Main extends Component {
     }
 
     render() {
+        console.log('main', this.state)
         return (
             <div className="App">
                 <Header />
@@ -219,10 +248,9 @@ class Main extends Component {
                     <div className="container-left">
                         <div className="video-player">
                             <video width="520" height="340" controls>
-                                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                                <source src={this.state.assetVideo} type="video/mp4" />
                                 Your browser does not support the video tag.
                             </video>
-                        </div>
                         <div className="action-row">
                             <ul>
                                 <li><MdLink /></li>
@@ -233,6 +261,7 @@ class Main extends Component {
                                 <li><MdDelete /></li>
                             </ul>
                         </div>
+                    </div>
                         <div className="access-control">
                             <Checkbox name="allow-dl"><h4>Allow Downloads</h4></Checkbox>
                             <Checkbox name="allow-share"><h4>Allow Sharing</h4></Checkbox>
@@ -253,6 +282,7 @@ class Main extends Component {
                                     lockModalPos={this.lockModalPos}
                                     checkTheBox={this.checkTheBox}
                                     createNewTag={this.createNewTag}
+                                    modalIsOpen={this.state.tags.modalIsOpen}
                                 />
                             </div>
                             <div className="modal-button">
@@ -268,6 +298,7 @@ class Main extends Component {
                                     checkTheBox={this.checkTheBox}
                                     assetName={this.state.assetName}
                                     addAsset={this.addAsset}
+                                    assetVideo={this.state.assetVideo}
                                 />
                             </div>
                             <div className="modal-button">

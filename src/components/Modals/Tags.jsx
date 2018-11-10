@@ -8,7 +8,7 @@ class Tags extends React.Component {
         if (props.tagData && props.tagData.length !== state.tagList.length) {
             const tagList = [];
             props.tagData.forEach(tag => tagList.push(tag));
-            return { tagList: props.tagData };
+            return { tagList: props.tagData , modalIsOpen: props.modalIsOpen };
         }
     }
 
@@ -63,16 +63,17 @@ class Tags extends React.Component {
         // tags passed in as props
         const { width, height, top, left, closeModal, modalIsOpen, lockModalPos, checkTheBox, tagData } = this.props;
 
+        console.log('inside tags', this.props, this.state)
         return (
             <div>
-                <ReactModal initWidth={width} initHeight={height + 50} top={top} left={left} onRequestClose={closeModal} isOpen={modalIsOpen}>
+                <ReactModal initWidth={300} initHeight={height + 50} top={top} left={left} onRequestClose={closeModal} isOpen={modalIsOpen}>
                     <div id="m1" name="tags">
                         <h3>Tags</h3>
                         <div className="tag-input">
                             <MdAddCircleOutline color={this.state.value.length === 0 ? "grey" : "orange"} onClick={this.createTag}/>
                             <input type="text" value={this.state.value} onChange={this.handleChange}/>
                         </div>
-                        <div className="body" style={{ display: 'flex', justifyContent: 'center' }}>
+                        <div className="body" style={{ display: 'flex' }}>
                             {this.renderTags(this.state.tagList)}
                         </div>
                         <Button onClick={closeModal} name="tags">
