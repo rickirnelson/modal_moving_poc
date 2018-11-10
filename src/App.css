@@ -89,6 +89,7 @@
     top: 10%;
     right: 100%;
 }
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -135,15 +136,20 @@
     width: 30px;
 }
 
-.tag-input {
-    display: flex;
-    justify-content: center;
-}
-
 .bucket-input {
     display: flex;
     padding-left: 20px;
     margin: 10px;
+}
+
+
+.bucket-input svg {
+    margin-right: 10px;
+}
+
+.bucket-input svg:hover {
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 .close-modal-btn {
@@ -153,9 +159,18 @@
     z-index: 10000
 }
 
+.tag-input {
+    display: flex;
+    padding-left: 20px;
+    margin: 10px;
+}
 .tag-input svg {
     height: 30px;
     width: 30px;
+    margin-right: 10px;
+}
+.tag-input svg:hover {
+    cursor: pointer;
 }
 
 .bucket-input svg {
@@ -183,9 +198,11 @@
     border: 1px solid whitesmoke;
 }
 
+.comments {
+    width: 100%;
+}
 .comments textarea {
     height: 100px;
-    width: 500px;
     border: 1px solid lightgrey;
 }
 
@@ -218,8 +235,8 @@
 }
 
 .comments {
-    margin: 1em;
-    width: 200px;
+    padding-top: 2em;
+    width: 450px;
     display: flex;
     justify-content: space-between;
 }
@@ -235,11 +252,22 @@
   bottom:0;
 }
 */
+
+
 .bucket-modal {
     background: white;
     border: 1px solid lightgrey;
     height: 100%;
     /* overflow: scroll; */
+    padding-bottom: 20px;
+    box-shadow: 2px 3px 4px rgba(0,0,0,0.4);
+}
+
+.tag-modal {
+    background: white;
+    border: 1px solid lightgrey;
+    height: 100%;
+    overflow: scroll;
     padding-bottom: 20px;
     box-shadow: 2px 3px 4px rgba(0,0,0,0.4);
 }

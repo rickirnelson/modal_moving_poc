@@ -63,25 +63,28 @@ class Tags extends React.Component {
         // tags passed in as props
         const { width, height, top, left, closeModal, modalIsOpen, lockModalPos, checkTheBox, tagData } = this.props;
 
-        console.log('inside tags', this.props, this.state)
         return (
-            <div>
+            <div className="tags">
                 <ReactModal initWidth={300} initHeight={height + 50} top={top} left={left} onRequestClose={closeModal} isOpen={modalIsOpen}>
-                    <div id="m1" name="tags">
-                        <h3>Tags</h3>
-                        <div className="tag-input">
-                            <MdAddCircleOutline color={this.state.value.length === 0 ? "grey" : "orange"} onClick={this.createTag}/>
-                            <input type="text" value={this.state.value} onChange={this.handleChange}/>
+                    <div id="m1" className="tag-modal" name="tags">
+                        <div className="playlist-header">
+                            <h3>Tags</h3>
                         </div>
-                        <div className="body" style={{ display: 'flex' }}>
-                            {this.renderTags(this.state.tagList)}
+                        <div className="close-modal-btn">
+                            <Button onClick={closeModal} name="tags">
+                                x
+                            </Button>
                         </div>
-                        <Button onClick={closeModal} name="tags">
-                            Close
-                        </Button>
-                        <Button name="tags" onClick={e => lockModalPos(e, "m1")}>
-                            { "Save Position" }
-                        </Button>
+                        <div className="body">
+                            <div className="tag-input">
+                                <MdAddCircleOutline color={this.state.value.length === 0 ? "grey" : "orange"} onClick={this.createTag}/>
+                                <input type="text" value={this.state.value} onChange={this.handleChange}/>
+                            </div>
+                            <div>
+                                {this.renderTags(this.state.tagList)}
+                            </div>
+                        </div>
+
                     </div>
                 </ReactModal>
             </div>

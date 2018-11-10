@@ -45,7 +45,7 @@ class Main extends Component {
             },
             data: {},
             attributes: {},
-            comments: 'Notes',
+            comments: '',
             currentUser: null,
             assetName: 'Asset Name',
             assetVideo: VIDEO.demo1
@@ -179,7 +179,6 @@ class Main extends Component {
 
     createListItem = (itemData) => {
         const bucketCopy = Object.assign({}, this.state.bucket);
-        console.log('checked', this.state.bucket)
         const updatedItemData = (bucketCopy.listItems || []).concat(itemData);
         this.setState({
             bucket: {
@@ -194,12 +193,10 @@ class Main extends Component {
         const updatedItemData = (bucketCopy.listItems || [])
         updatedItemData.forEach(item => {
             if (item.listName === listname) {
-                console.log('where to add', item, asset)
                 item.assets.push(asset)
             }
         })
-        console.log('adding?', updatedItemData)
-        // updatedItemData.assets.concat(asset);
+
         this.setState({
             bucket: {
                 listItems: updatedItemData,
@@ -209,7 +206,7 @@ class Main extends Component {
     }
     save(data) {
         // TODO: redo all this
-        console.log('saved data:', data)
+        console.log('saving', data);
         let userAndData;
         if (data.bucket && JSON.stringify(data.bucket) !== JSON.stringify(this.state.bucket)) {
             // TODO: add ability to save position and checked boxes here.
@@ -238,8 +235,13 @@ class Main extends Component {
         this.setState(userAndData);
     }
 
+    handleComments = (e) => {
+        this.setState({
+            comments: e.target.value
+        })
+    }
+
     render() {
-        console.log('main', this.state)
         return (
             <div className="App">
                 <Header />
@@ -326,7 +328,7 @@ class Main extends Component {
                             <img src={Transcription} alt=""/>
                         </div>
                         <div className="comments">
-                            <textarea value={this.state.comments} />
+                            <textarea cols="500" rows="10" placeholder="Comments" value={this.state.comments} onChange={this.handleComments}/>
                         </div>
                         <div className="save-button">
                             <Button onClick={this.save}>Save</Button>

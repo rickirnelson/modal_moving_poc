@@ -48,7 +48,7 @@ class Buckets extends React.Component {
         if (!playlists) {
             return (<div> no playlists yet...</div>)
         }
-        console.log('what is in playlists', playlists)
+        
         return (
             <div className="checkboxes">
                 <ul>
