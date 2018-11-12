@@ -285,7 +285,7 @@ class Main extends Component {
                     <div className="container-right">
                         <div className="button-row">
                             <div className="modal-button">
-                                <Button onClick={this.openModal} name="tags">
+                                <Button onClick={this.state.tags.modalIsOpen ? this.closeModal : this.openModal} name="tags">
                                     Tags
                                 </Button>
                                 <Tags
@@ -301,7 +301,7 @@ class Main extends Component {
                                 />
                             </div>
                             <div className="modal-button">
-                                <Button onClick={this.openModal} name="bucket">
+                                <Button onClick={this.state.bucket.modalIsOpen ? this.closeModal : this.openModal} name="bucket">
                                     Bucket
                                 </Button>
                                 <Buckets
@@ -319,7 +319,7 @@ class Main extends Component {
                                 />
                             </div>
                             <div className="modal-button">
-                                <Button onClick={this.openModal} name="data">
+                                <Button onClick={this.state.data.modalIsOpen ? this.closeModal : this.openModal} name="data">
                                     Data
                                 </Button>
                                 <Data
@@ -331,7 +331,7 @@ class Main extends Component {
                                 />
                             </div>
                             <div className="modal-button">
-                                <Button onClick={this.openModal} name="attributes">
+                                <Button onClick={this.state.attributes.modalIsOpen ? this.closeModal : this.openModal} name="attributes">
                                     Attribute
                                 </Button>
                                 <Attributes

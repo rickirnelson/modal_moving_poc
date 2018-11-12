@@ -9,9 +9,9 @@ class Attributes extends React.Component {
         const { width, height, top, left, closeModal, modalIsOpen, lockModalPos, checkTheBox } = this.props;
 
         return (
-            <div>
+            <div className="attributes">
                 <ReactModal initWidth={200} initHeight={200} top={top} left={left} onRequestClose={closeModal} isOpen={modalIsOpen}>
-                    <div id="m4">
+                    <div id="m4" className="attributes-modal">
                         <h3>Attributes</h3>
                         <div>
                             <MdBuild /> In Progress
