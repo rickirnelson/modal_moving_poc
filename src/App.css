@@ -85,9 +85,9 @@
 }
 
 .buckets {
-    position: relative;
+    /* position: relative;
     top: 10%;
-    right: 100%;
+    right: 100%; */
 }
 
 .header {

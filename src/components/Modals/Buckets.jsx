@@ -6,6 +6,17 @@ import '../../App.css';
 
 
 class Buckets extends React.Component {
+    static getDerivedStateFromProps(props) {
+        if (props.foreground === 'bucket') {
+            return {
+                isForeground: true
+            }
+        }
+        return {
+            isForeground: false
+        }
+    }
+
     state = {
         value: '',
         playlist: []
@@ -48,7 +59,7 @@ class Buckets extends React.Component {
         if (!playlists) {
             return (<div> no playlists yet...</div>)
         }
-        
+
         return (
             <div className="checkboxes">
                 <ul>
@@ -113,12 +124,17 @@ class Buckets extends React.Component {
         )
     }
 
+    clickForeground = () => {
+        this.props.handleForeground('buckets');
+    }
     render() {
         const { width, height, top, left, closeModal, modalIsOpen, lockModalPos, checkTheBox, createListItem, listItems } = this.props;
 
+        const { isForeground } = this.state;
+        console.log(this.props)
         return (
-            <div className="buckets">
-                <ReactModal initWidth={300} initHeight={500}  onRequestClose={closeModal} isOpen={modalIsOpen}>
+            <div className="buckets" style={{ zIndex: isForeground ? '1000' : '0' }} onClick={this.clickForeground}>
+                <ReactModal initWidth={300} initHeight={600} top={top} left={left} onRequestClose={closeModal} isOpen={modalIsOpen}>
                     <div name="bucket" className="bucket-modal" id="m2">
                         <div className="playlist-header">
                             <h3>Playlist</h3>

@@ -48,7 +48,8 @@ class Main extends Component {
             comments: '',
             currentUser: null,
             assetName: 'Asset Name',
-            assetVideo: VIDEO.demo1
+            assetVideo: VIDEO.demo1,
+            foreground: null
         };
 
         this.openModal = this.openModal.bind(this);
@@ -241,6 +242,12 @@ class Main extends Component {
         })
     }
 
+    handleForeground = (modal) => {
+        this.setState({
+            foreground: modal
+        })
+    }
+
     render() {
         return (
             <div className="App">
@@ -268,7 +275,11 @@ class Main extends Component {
                             <Checkbox name="allow-dl"><h4>Allow Downloads</h4></Checkbox>
                             <Checkbox name="allow-share"><h4>Allow Sharing</h4></Checkbox>
                             <br />
-                            <h4>Anyone with the following link can view this asset: (???)</h4>
+                            <h4>Anyone with the following link can view this asset: </h4>
+                            <a href="http://www.poc-asset-page.com.s3-website-us-west-2.amazonaws.com/main">
+                                {'http://www.poc-asset-page.com.s3-website-us-west-2.amazonaws.com/main'}
+                            </a>
+
                         </div>
                     </div>
                     <div className="container-right">
@@ -285,6 +296,8 @@ class Main extends Component {
                                     checkTheBox={this.checkTheBox}
                                     createNewTag={this.createNewTag}
                                     modalIsOpen={this.state.tags.modalIsOpen}
+                                    foreground={this.state.foreground}
+                                    handleForeground={this.handleForeground}
                                 />
                             </div>
                             <div className="modal-button">
@@ -301,6 +314,8 @@ class Main extends Component {
                                     assetName={this.state.assetName}
                                     addAsset={this.addAsset}
                                     assetVideo={this.state.assetVideo}
+                                    foreground={this.state.foreground}
+                                    handleForeground={this.handleForeground}
                                 />
                             </div>
                             <div className="modal-button">
@@ -311,6 +326,8 @@ class Main extends Component {
                                     {...this.state.data}
                                     openModal={this.openModal}
                                     closeModal={this.closeModal}
+                                    foreground={this.state.foreground}
+                                    handleForeground={this.handleForeground}
                                 />
                             </div>
                             <div className="modal-button">
@@ -321,6 +338,8 @@ class Main extends Component {
                                     {...this.state.attributes}
                                     openModal={this.openModal}
                                     closeModal={this.closeModal}
+                                    foreground={this.state.foreground}
+                                    handleForeground={this.handleForeground}
                                 />
                             </div>
                         </div>
