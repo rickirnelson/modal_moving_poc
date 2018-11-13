@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactModal from 'react-modal-resizable-draggable';
-import { MdAddCircleOutline } from "react-icons/md";
+import { MdAddCircleOutline, MdClear } from "react-icons/md";
 import { Button, Checkbox } from 'react-bootstrap';
 
 class Tags extends React.Component {
@@ -34,6 +34,10 @@ class Tags extends React.Component {
         }
     }
 
+    removeTag = (idx) => {
+        this.props.removeItem('tags', idx);
+    }
+
     renderTags = (tagList) => {
         if (!tagList) {
             return (<div> no tags yet...</div>)
@@ -43,7 +47,7 @@ class Tags extends React.Component {
                 <ul>
                     {
                         tagList.map((tag, i) =>
-                            <li>
+                            <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                                 <Checkbox
                                     name={`${tag}-${i}`}
                                     onChange={e => this.props.checkTheBox(e, 'tags')}
@@ -51,6 +55,9 @@ class Tags extends React.Component {
                                 >
                                     {tag}
                                 </Checkbox>
+                                <div className="clear-button">
+                                    <MdClear onClick={() => this.removeTag(i)} />
+                                </div>
                             </li>
                         )
                     }

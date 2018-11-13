@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import ReactModal from 'react-modal-resizable-draggable';
-import { MdAddCircleOutline } from "react-icons/md";
+import { MdAddCircleOutline, MdClear } from "react-icons/md";
 import { Button, Checkbox } from 'react-bootstrap';
 import '../../App.css';
 
@@ -55,6 +55,14 @@ class Buckets extends React.Component {
         })
     }
 
+    removeBucket = (idx) => {
+        this.props.removeItem('bucket', idx);
+    }
+
+    removeAssetFromBucket = (e) => {
+        this.props.removeAsset(e[0], e[1]);
+    }
+
     renderLists = (playlists) => {
         if (!playlists) {
             return (<div> no playlists yet...</div>)
@@ -81,10 +89,13 @@ class Buckets extends React.Component {
                                             <button value={bucket.listName} onClick={this.addAssetToPlaylist}>Add Asset</button>
                                         }
                                     </div>
+                                    <div className="clear-button">
+                                        <MdClear onClick={() => this.removeBucket(i)} />
+                                    </div>
                                 </li>
                                 <li className="asset-detail">
                                     { bucket.checked &&
-                                        this.renderListAssets(bucket, bucket.checked)
+                                        this.renderListAssets(bucket, bucket.checked, i)
                                     }
                                 </li>
                             </Fragment>
@@ -95,13 +106,13 @@ class Buckets extends React.Component {
         )
     }
 
-    renderListAssets = (bucket, isChecked) => {
+    renderListAssets = (bucket, isChecked, bucketIdx) => {
         return (
             <div>
                 {isChecked &&
                     <div className="bucket-detail">
                         {
-                            bucket.assets.map(item =>
+                            bucket.assets.map((item, assetIdx) =>
                                 <ul className="asset-detail-list">
                                     <li>
                                         <div className="asset-video-player">
@@ -115,6 +126,9 @@ class Buckets extends React.Component {
                                         <p className="asset-name">{item.assetName}</p>
                                         <p className="asset-notes">{item.notes || 'No comments'}</p>
                                     </li>
+                                    <div className="clear-asset">
+                                        <MdClear onClick={() => this.removeAssetFromBucket([bucketIdx, assetIdx])} />
+                                    </div>
                                 </ul>
                             )
                         }

@@ -90,6 +90,30 @@
     right: 100%; */
 }
 
+.clear-button {
+    position: relative;
+    font-weight: 600;
+    right: 20%;
+}
+
+.clear-button:hover {
+    cursor: pointer;
+    font-weight: 600;
+    color: red;
+    transform: 0.2s;
+}
+.clear-asset:hover {
+    cursor: pointer;
+    font-weight: 600;
+    color: red;
+    transform: 0.2s;
+}
+
+.clear-asset {
+    font-weight: 600;
+    position: relative;
+}
+
 .header {
     display: flex;
     justify-content: space-between;

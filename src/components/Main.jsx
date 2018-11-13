@@ -248,6 +248,35 @@ class Main extends Component {
         })
     }
 
+    removeItem = (type, idx) => {
+        console.log('bucket', this.state['bucket'])
+        console.log('tags', this.state['tags'])
+        if (type === 'tags') {
+            const tagState = {...this.state.tags};
+            tagState.tagData.splice(idx, 1);
+            console.log('new tags', tagState);
+            this.setState({
+                [type]: tagState
+            })
+        } else if (type === 'bucket') {
+            const bucketState = {...this.state.bucket};
+            bucketState.listItems.splice(idx, 1)
+            this.setState({
+                [type]: bucketState
+            })
+        }
+    }
+
+    removeAsset = (bucketIdx, assetIdx) => {
+
+        const bucketState = {...this.state.bucket};
+        console.log('removal!!!!', bucketState, bucketIdx, assetIdx)
+        bucketState.listItems[bucketIdx].assets.splice(assetIdx, 1);
+        this.setState({
+            bucket: bucketState
+        })
+    }
+
     render() {
         return (
             <div className="App">
@@ -298,6 +327,7 @@ class Main extends Component {
                                     modalIsOpen={this.state.tags.modalIsOpen}
                                     foreground={this.state.foreground}
                                     handleForeground={this.handleForeground}
+                                    removeItem={this.removeItem}
                                 />
                             </div>
                             <div className="modal-button">
@@ -316,6 +346,8 @@ class Main extends Component {
                                     assetVideo={this.state.assetVideo}
                                     foreground={this.state.foreground}
                                     handleForeground={this.handleForeground}
+                                    removeItem={this.removeItem}
+                                    removeAsset={this.removeAsset}
                                 />
                             </div>
                             <div className="modal-button">
