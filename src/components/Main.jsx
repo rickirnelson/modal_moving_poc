@@ -55,6 +55,7 @@ class Main extends Component {
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.lockModalPos = this.lockModalPos.bind(this);
+        this.modalZIndex = this.modalZIndex.bind(this);
         this.save = this.save.bind(this);
     }
 
@@ -248,6 +249,12 @@ class Main extends Component {
         })
     }
 
+    modalZIndex = (name) => {
+        this.setState({
+            modalClicked: name
+        })
+    }
+
     removeItem = (type, idx) => {
         console.log('bucket', this.state['bucket'])
         console.log('tags', this.state['tags'])
@@ -360,6 +367,8 @@ class Main extends Component {
                                     closeModal={this.closeModal}
                                     foreground={this.state.foreground}
                                     handleForeground={this.handleForeground}
+                                    modalZIndex={this.modalZIndex}
+                                    clickedModal={this.state.modalClicked}
                                 />
                             </div>
                             <div className="modal-button">
@@ -372,6 +381,8 @@ class Main extends Component {
                                     closeModal={this.closeModal}
                                     foreground={this.state.foreground}
                                     handleForeground={this.handleForeground}
+                                    modalZIndex={this.modalZIndex}
+                                    clickedModal={this.state.modalClicked}
                                 />
                             </div>
                         </div>
